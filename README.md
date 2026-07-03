@@ -28,4 +28,4 @@ Trip data and the destination email (`assistant@example.com`) are placeholders. 
 
 ---
 
-*Part of my AI Operations portfolio (github.com/lisaesterhuizen0-wq)*
+*Part of my AI automation & enablement portfolio (github.com/lisaesterhuizen0-wq)*

@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Travel Selection - October 1-7, 2025</title>
   
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600&family=Gilda+Display&display=swap" rel="stylesheet">
+  <!-- Google Fonts — Field Notes v2 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   
   <!-- React & Babel from CDN -->
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -18,331 +18,357 @@
 
   
   <style>
+    /* ============================================================
+       Field Notes v2 — locked design system
+       Reskin only: colours / type / borders. No logic touched.
+       ============================================================ */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     :root {
-      --primary: #1a3a52;
-      --accent: #c9915d;
-      --accent-light: #ddb88c;
-      --bg: #faf9f7;
-      --card-bg: #ffffff;
-      --text: #2c3e50;
-      --text-light: #6c7a89;
-      --border: #e8e5e0;
-      --success: #2d8659;
-      --shadow: rgba(26, 58, 82, 0.08);
-      --shadow-hover: rgba(26, 58, 82, 0.15);
+      --paper: #F9FBFC;        /* cool blue-white page background */
+      --ink: #1C2B3A;          /* blue-black pen ink — primary text/borders */
+      --ink-soft: rgba(28, 43, 58, 0.64);  /* secondary text */
+      --ink-faint: rgba(28, 43, 58, 0.40); /* tertiary/labels */
+      --ochre: #0E7C66;        /* viridian — cold lab green accent */
+      --ochre-deep: #095A4A;   /* darker viridian — hovers, dates */
+      --rule: rgba(28, 43, 58, 0.24);      /* hairline rules */
+      --rule-soft: rgba(28, 43, 58, 0.10); /* faint rules, shadows */
+      --grid: rgba(43, 76, 126, 0.07);     /* blue quad-paper grid lines */
+      --card: #FFFFFF;         /* raised surfaces / cards */
+      --blue: #0B6EFF;         /* bright terminal blue — labels, meta */
     }
-    
+
     body {
-      font-family: 'Crimson Pro', serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 32px 32px;
+      color: var(--ink);
+      font-family: "Public Sans", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
     }
-    
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 40px 20px 120px;
+      padding: 56px 28px 120px;
     }
-    
+
+    /* ---- Boxed masthead ---- */
     header {
-      text-align: center;
-      margin-bottom: 60px;
-      padding: 40px 20px;
-      background: linear-gradient(135deg, var(--primary) 0%, #2c5570 100%);
-      border-radius: 16px;
-      color: white;
+      text-align: left;
+      margin-bottom: 48px;
+      padding: 32px 32px 28px;
+      background: var(--card);
+      border: 1px solid var(--ink);
+      border-radius: 0;
+      color: var(--ink);
+      box-shadow: 4px 4px 0 var(--rule-soft);
       position: relative;
       overflow: hidden;
     }
-    
+
     header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%);
-      animation: shimmer 3s infinite;
+      content: "§ TRAVEL SELECTION LOG";
+      display: block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--blue);
+      margin-bottom: 14px;
     }
-    
-    @keyframes shimmer {
-      0%, 100% { transform: translateX(-100%); }
-      50% { transform: translateX(100%); }
-    }
-    
+
     h1 {
-      font-family: 'Gilda Display', serif;
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 400;
-      margin-bottom: 12px;
-      letter-spacing: 0.5px;
-      position: relative;
-      z-index: 1;
+      font-family: "Newsreader", serif;
+      font-size: clamp(2rem, 5vw, 2.9rem);
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 10px;
+      letter-spacing: 0;
+      color: var(--ink);
     }
-    
+
+    h1 em { font-style: normal; }
+
     .subtitle {
-      font-size: 1.1rem;
-      opacity: 0.9;
-      font-weight: 300;
-      position: relative;
-      z-index: 1;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--ink-soft);
+      font-weight: 400;
     }
-    
+
+    /* ---- Progress ---- */
     .progress-container {
-      background: white;
-      padding: 24px;
-      border-radius: 12px;
-      margin-bottom: 40px;
-      box-shadow: 0 2px 12px var(--shadow);
+      background: var(--card);
+      padding: 22px 24px;
+      border: 1px solid var(--rule);
+      border-radius: 0;
+      margin-bottom: 44px;
+      box-shadow: 4px 4px 0 var(--rule-soft);
     }
-    
+
     .progress-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
-    
+
     .progress-text {
-      font-size: 0.95rem;
-      color: var(--text-light);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ink-soft);
     }
-    
+
     .progress-count {
-      font-weight: 600;
-      color: var(--accent);
+      font-weight: 500;
+      color: var(--ochre);
     }
-    
+
     .progress-bar {
       width: 100%;
       height: 8px;
-      background: var(--border);
-      border-radius: 999px;
+      background: var(--rule-soft);
+      border-radius: 0;
       overflow: hidden;
     }
-    
+
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
-      border-radius: 999px;
+      background: var(--ochre);
+      border-radius: 0;
       transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
+
+    /* ---- Sections ---- */
     .section {
       margin-bottom: 48px;
       animation: fadeIn 0.6s ease-out;
       animation-fill-mode: both;
     }
-    
+
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    
+
     .section:nth-child(1) { animation-delay: 0.1s; }
     .section:nth-child(2) { animation-delay: 0.2s; }
     .section:nth-child(3) { animation-delay: 0.3s; }
-    
+
     .section-header {
       display: flex;
       align-items: center;
       gap: 12px;
       margin-bottom: 24px;
       padding-bottom: 12px;
-      border-bottom: 2px solid var(--border);
+      border-bottom: 1px solid var(--ink);
     }
-    
+
     .section-icon {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
     }
-    
+
     h2 {
-      font-family: 'Gilda Display', serif;
+      font-family: "Newsreader", serif;
       font-size: 1.75rem;
-      font-weight: 400;
-      color: var(--primary);
-      letter-spacing: 0.3px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0;
     }
-    
+
     .subsection {
       margin-bottom: 32px;
     }
-    
+
     .subsection-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-soft);
       margin-bottom: 16px;
-      padding-left: 4px;
+      padding-left: 0;
     }
-    
+
+    .subsection-title::before {
+      content: "§ ";
+      color: var(--ink-faint);
+    }
+
     .options-grid {
       display: grid;
       gap: 12px;
     }
-    
+
+    /* ---- Option cards ---- */
     .option-card {
-      background: var(--card-bg);
-      border: 2px solid var(--border);
-      border-radius: 12px;
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 0;
       padding: 20px;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
     }
-    
+
     .option-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      bottom: 0;
+      width: 4px;
+      background: var(--ochre);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
+
     .option-card:hover {
-      border-color: var(--accent-light);
-      box-shadow: 0 4px 16px var(--shadow-hover);
-      transform: translateY(-2px);
+      border-color: var(--ink);
+      box-shadow: 4px 4px 0 var(--rule-soft);
     }
-    
+
     .option-card.selected {
-      border-color: var(--accent);
-      background: linear-gradient(135deg, #fffbf5 0%, #ffffff 100%);
+      border-color: var(--ochre);
+      background: var(--card);
     }
-    
+
     .option-card.selected::before {
-      transform: scaleX(1);
+      transform: scaleY(1);
     }
-    
+
     .option-card.recommended {
-      border-color: var(--accent-light);
+      border-color: var(--rule);
     }
-    
+
     .option-card.recommended::after {
-      content: '⭐ Recommended';
+      content: 'RECOMMENDED';
       position: absolute;
       top: 12px;
       right: 12px;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-      color: white;
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.3px;
+      background: transparent;
+      color: var(--ochre-deep);
+      border: 1px solid var(--ochre-deep);
+      padding: 3px 10px;
+      border-radius: 0;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.62rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
     }
-    
+
     .option-header {
       display: flex;
       align-items: flex-start;
       gap: 12px;
       margin-bottom: 8px;
     }
-    
+
     .radio-button {
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--border);
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--rule);
       border-radius: 50%;
       flex-shrink: 0;
-      margin-top: 2px;
+      margin-top: 3px;
       position: relative;
       transition: all 0.2s;
     }
-    
+
     .option-card:hover .radio-button {
-      border-color: var(--accent);
+      border-color: var(--ink);
     }
-    
+
     .option-card.selected .radio-button {
-      border-color: var(--accent);
-      background: var(--accent);
+      border-color: var(--ochre);
+      background: var(--ochre);
     }
-    
+
     .option-card.selected .radio-button::after {
       content: '';
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 8px;
-      height: 8px;
-      background: white;
+      width: 7px;
+      height: 7px;
+      background: var(--card);
       border-radius: 50%;
     }
-    
+
     .option-content {
       flex: 1;
     }
-    
+
     .option-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text);
+      font-family: "Newsreader", serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--ink);
       margin-bottom: 6px;
     }
-    
+
     .option-details {
-      font-size: 0.95rem;
-      color: var(--text-light);
-      line-height: 1.5;
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
       margin-bottom: 8px;
     }
-    
+
     .option-meta {
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
       font-size: 0.9rem;
     }
-    
+
     .meta-item {
       display: flex;
       align-items: center;
       gap: 6px;
-      color: var(--text-light);
+      color: var(--ink-soft);
     }
-    
+
     .price {
-      font-weight: 600;
-      color: var(--accent);
-      font-size: 1.05rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 500;
+      color: var(--ochre);
+      font-size: 0.95rem;
+      letter-spacing: 0.03em;
     }
-    
+
+    /* ---- Bottom bar ---- */
     .bottom-bar {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: white;
-      border-top: 1px solid var(--border);
+      background: var(--card);
+      border-top: 1px solid var(--ink);
       padding: 20px;
-      box-shadow: 0 -4px 16px var(--shadow);
+      box-shadow: 0 -4px 16px var(--rule-soft);
       z-index: 100;
     }
-    
+
     .bottom-bar-content {
       max-width: 1200px;
       margin: 0 auto;
@@ -351,65 +377,72 @@
       align-items: center;
       flex-wrap: wrap;
     }
-    
+
+    /* ---- Buttons: mono uppercase ---- */
     .btn {
-      padding: 16px 32px;
-      border-radius: 8px;
-      font-family: 'Crimson Pro', serif;
-      font-size: 1rem;
-      font-weight: 600;
-      border: none;
+      padding: 14px 28px;
+      border-radius: 0;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1px solid var(--ink);
       cursor: pointer;
-      transition: all 0.3s;
+      transition: all 0.2s;
       display: flex;
       align-items: center;
       gap: 8px;
       white-space: nowrap;
     }
-    
+
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-      color: white;
+      background: var(--ink);
+      color: var(--paper);
       flex: 1;
       min-width: 200px;
       justify-content: center;
     }
-    
+
     .btn-primary:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(201, 145, 93, 0.4);
+      background: var(--ochre-deep);
+      border-color: var(--ochre-deep);
     }
-    
+
     .btn-primary:disabled {
-      opacity: 0.5;
+      opacity: 0.4;
       cursor: not-allowed;
     }
-    
+
     .btn-secondary {
-      background: white;
-      border: 2px solid var(--border);
-      color: var(--text);
+      background: transparent;
+      border: 1px solid var(--ink);
+      color: var(--ink);
     }
-    
+
     .btn-secondary:hover {
-      border-color: var(--accent);
-      color: var(--accent);
+      border-color: var(--ochre-deep);
+      color: var(--ochre-deep);
     }
-    
+
     .validation-message {
       flex: 1;
-      color: var(--text-light);
-      font-size: 0.95rem;
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--ink-soft);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
       padding-left: 12px;
     }
-    
+
+    /* ---- Modal ---- */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(28, 43, 58, 0.55);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -417,51 +450,47 @@
       animation: fadeIn 0.3s;
       padding: 20px;
     }
-    
+
     .modal {
-      background: white;
-      border-radius: 16px;
+      background: var(--card);
+      border: 1px solid var(--ink);
+      border-radius: 0;
       padding: 40px;
       max-width: 600px;
       width: 100%;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      box-shadow: 6px 6px 0 var(--rule-soft);
       animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       max-height: 90vh;
       overflow-y: auto;
     }
-    
+
     @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    
+
     .modal-icon {
-      font-size: 3rem;
+      font-size: 2.6rem;
       text-align: center;
       margin-bottom: 20px;
     }
-    
+
     .modal h3 {
-      font-family: 'Gilda Display', serif;
+      font-family: "Newsreader", serif;
       font-size: 1.75rem;
+      font-weight: 500;
       text-align: center;
       margin-bottom: 16px;
-      color: var(--primary);
+      color: var(--ink);
     }
-    
+
     .modal p {
       text-align: center;
-      color: var(--text-light);
+      color: var(--ink-soft);
       margin-bottom: 24px;
       line-height: 1.6;
     }
-    
+
     .modal-actions {
       display: flex;
       gap: 12px;
@@ -470,43 +499,43 @@
 
     @media (max-width: 768px) {
       .container {
-        padding: 20px 16px 140px;
+        padding: 32px 16px 140px;
       }
-      
+
       header {
-        padding: 30px 20px;
+        padding: 24px 20px;
         margin-bottom: 40px;
       }
-      
+
       h1 {
         font-size: 2rem;
       }
-      
+
       .subtitle {
-        font-size: 1rem;
+        font-size: 0.78rem;
       }
-      
+
       .bottom-bar-content {
         flex-direction: column;
       }
-      
+
       .btn-primary {
         width: 100%;
       }
-      
+
       .validation-message {
         text-align: center;
         padding-left: 0;
       }
-      
+
       .modal {
         padding: 30px 20px;
       }
-      
+
       .modal-actions {
         flex-direction: column;
       }
-      
+
       .btn {
         width: 100%;
         justify-content: center;
